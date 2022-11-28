@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchSpaces } from "../store/spaces/thunks";
 import { selectSpaces } from "../store/spaces/selectors";
-import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const AllSpaces = () => {
   const dispatch = useDispatch();
@@ -30,7 +30,9 @@ const AllSpaces = () => {
                 >
                   {up.title}
                 </p>
-                <button>Visit space</button>
+                <Link to={`/spaces/${up.id}`}>
+                  <button>Visit space</button>
+                </Link>
               </div>
             );
           })}
