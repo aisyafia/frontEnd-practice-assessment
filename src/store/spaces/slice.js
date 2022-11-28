@@ -17,9 +17,14 @@ export const spaceSlice = createSlice({
       // console.log("action 2:", action);
       state.spaceDetails = action.payload.stories;
     },
+    signUpSuccess: (state, action) => {
+      console.log("signup action", action);
+      state.spaces = [...state.spaces, action.payload.space];
+    },
   },
 });
 
-export const { allSpacesFetched, oneSpaceFetched } = spaceSlice.actions;
+export const { allSpacesFetched, oneSpaceFetched, signUpSuccess } =
+  spaceSlice.actions;
 
 export default spaceSlice.reducer;
