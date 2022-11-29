@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectToken } from "../store/user/selectors";
 import { logOut } from "../store/user/slice";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { selectUser } from "../store/user/selectors";
 
 export const Navigation = () => {
   const [open, setOpen] = useState(false);
@@ -11,11 +12,16 @@ export const Navigation = () => {
   const dispatch = useDispatch();
 
   const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
+  // if (user) {
+  //   console.log("this is user", user.id);
+  // }
 
+  // const { id } = useParams();
   return (
     <Nav>
       <Logo href="/">
-        Codaisseur<span>templates</span>
+        COOL STORY<span>BRO!</span>
       </Logo>
       <Hamburger onClick={() => setOpen(!open)}>
         <span />
@@ -23,7 +29,7 @@ export const Navigation = () => {
         <span />
       </Hamburger>
       <Menu open={open}>
-        {token ? <MenuLink to="/empty1">MySpace</MenuLink> : ``}
+        {user ? <MenuLink to={`/spaces/${user.id}`}>MySpace</MenuLink> : ``}
         <MenuLink to="/empty2">Empty 2</MenuLink>
         {token ? (
           <button onClick={() => dispatch(logOut())}>Logout</button>
