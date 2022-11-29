@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchOneSpace } from "../store/spaces/thunks";
+import { fetchOneSpace as fetchOneSpaceStories } from "../store/spaces/thunks";
 import { useParams } from "react-router-dom";
 import {
   selectSpaceDetails,
@@ -17,8 +17,12 @@ const OneSpace = () => {
   //   console.log(displaySpaceStories, "sorted selector works");
 
   useEffect(() => {
-    dispatch(fetchOneSpace(id));
+    dispatch(fetchOneSpaceStories(id));
   }, [id]);
+
+  if (!displaySpaceById) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div

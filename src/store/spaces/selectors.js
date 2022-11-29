@@ -21,5 +21,10 @@ export const selectSortedStories = (reduxState) => {
   // return reduxState.spaces.spaceDetails.sort(compareCreatedAt);
 };
 
-export const selectSpaceById = (id) => (reduxState) =>
-  reduxState.spaces.spaces.find((s) => [s.id === id]);
+export const selectSpaceById = (id) => (reduxState) => {
+  if (reduxState.spaces.spaces) {
+    return reduxState.spaces.spaces.find((s) => s.id === parseInt(id));
+  } else {
+    return undefined;
+  }
+};
