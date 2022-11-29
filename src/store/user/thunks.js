@@ -4,7 +4,11 @@ import { selectToken } from "./selectors";
 import { appLoading, appDoneLoading, setMessage } from "../appState/slice";
 import { showMessageWithTimeout } from "../appState/thunks";
 import { loginSuccess, logOut, tokenStillValid } from "./slice";
-import { signUpSuccess } from "../spaces/slice";
+import {
+  allSpacesFetched,
+  oneSpaceFetched,
+  signUpSuccess,
+} from "../spaces/slice";
 
 export const signUp = (name, email, password) => {
   return async (dispatch, getState) => {
@@ -61,6 +65,8 @@ export const login = (email, password) => {
       );
       dispatch(showMessageWithTimeout("success", false, "welcome back!", 1500));
       dispatch(appDoneLoading());
+      // dispatch(allSpacesFetched(response.data));
+      dispatch(oneSpaceFetched(response.data));
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);
@@ -105,6 +111,8 @@ export const getUserWithStoredToken = () => {
       // token is still valid
       dispatch(tokenStillValid({ user: response.data }));
       dispatch(appDoneLoading());
+      // dispatch(allSpacesFetched(response.data));
+      dispatch(oneSpaceFetched(response.data));
     } catch (error) {
       if (error.response) {
         console.log(error.response.message);

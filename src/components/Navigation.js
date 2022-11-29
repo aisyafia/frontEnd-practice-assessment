@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectToken } from "../store/user/selectors";
+import { selectToken, selectUser } from "../store/user/selectors";
 import { logOut } from "../store/user/slice";
-import { Link, useParams } from "react-router-dom";
-import { selectUser } from "../store/user/selectors";
+import { Link } from "react-router-dom";
 
 export const Navigation = () => {
   const [open, setOpen] = useState(false);
