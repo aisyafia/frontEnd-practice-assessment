@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { fetchOneSpace as fetchOneSpaceStories } from "../store/spaces/thunks";
 import { useParams } from "react-router-dom";
 import {
-  selectSpaceDetails,
   selectSpaceById,
   selectSortedStories,
 } from "../store/spaces/selectors";
@@ -13,6 +12,7 @@ import { DeleteStoryButton } from "./DeleteStoryButton";
 const OneSpace = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
+
   const displaySpaceById = useSelector(selectSpaceById(id));
   // console.log("space id:", displaySpaceById.id);
   //   console.log(displaySpaceById, "1st selector");
@@ -48,7 +48,11 @@ const OneSpace = () => {
               <h4>{story.name}</h4>
               <p>{story.content}</p>
               <img src={story.imageUrl} width="125px" alt="sweets" />
-              {user.id === displaySpaceById.id ? <DeleteStoryButton /> : ``}
+              {user && user.id === displaySpaceById.id ? (
+                <DeleteStoryButton />
+              ) : (
+                ``
+              )}
             </div>
           );
         })}
